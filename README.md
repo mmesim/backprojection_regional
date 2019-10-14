@@ -15,4 +15,5 @@ TTBox : A MatLab Toolbox for the computation of 1D Teleseismic Travel Times http
 
 
 Written in Matlab
+
 Author: Maria Mesimeri
