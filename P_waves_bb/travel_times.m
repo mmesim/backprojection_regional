@@ -1,7 +1,7 @@
 clear;clc; tic %start timer
 %% Paramaters
 %path to waveforms
-mydata='/uufs/chpc.utah.edu/common/home/koper-group1/mesimeri/Array_Detection/Backprojection_SSA/DATA';
+mydata='DATA';
 %-------------------------------------------------------------------------
 % Parallel settings
 workers=12;                 %Set number of cores to work on a local machine

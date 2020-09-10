@@ -1,10 +1,12 @@
-#  Backprojection
-Using regional data
+# Strong motion and S phases
 
-Based on Source Scanning Algorithm with a few modifications 
+(1) **travel_times** : travel_times.m, velocity model (similar to velocity.mat).
 
-*Rapid identification of earthquake rupture plane using Source‐Scanning Algorithm 
-Honn Kao, Shao‐Ju Shan https://doi.org/10.1111/j.1365-246X.2006.03271.x*
+TTBox : A MatLab Toolbox for the computation of 1D Teleseismic Travel Times <https://doi.org/10.1785/gssrl.75.6.726>
+
+(2) **backprojection**: backprojection_strong_motion.m (modify parameters.m file)
+
+Input: Raw waveforms instrument corrected for velocity 
 
 
 Written in Matlab
