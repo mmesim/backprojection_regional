@@ -6,7 +6,7 @@ TTBox : A MatLab Toolbox for the computation of 1D Teleseismic Travel Times <htt
 
 (2) **backprojection**: backprojection_strong_motion.m (modify parameters.m file)
 
-Input: Raw waveforms instrument corrected for velocity 
+Input: Raw waveforms instrument corrected for acceleration 
 
 
 Written in Matlab
