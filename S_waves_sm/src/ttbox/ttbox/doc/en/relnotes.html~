@@ -1,0 +1,268 @@
+  <html>
+  <head>
+    <title></title>
+    <meta content="">
+
+    <LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ttbox.css">
+  </head>
+  <body>
+  <h4>Release Notes for Freeze DD.MM.YYYY</h4>
+  
+ 
+ 
+  
+
+  
+  <p>
+  This document is divided into the following sections:
+  </p>
+ 
+
+ 
+  <ol>
+      
+
+<li><a href="#newfeat">Incredible New Features</a></li>
+      
+<li><a href="#newdoc">New/Modified Documentation</a></li>
+      
+<li><a href="#newprog">New Routines</a></li>
+      
+<li><a href="#modprog">Modified Routines</a></li>
+      
+<li><a href="#modstruct">Modified Data Structures</a></li>
+      
+<li><a href="#deprecated">Deprecated Routines</a></li>
+  
+
+</ol>
+  
+  
+  
+  
+ 
+
+ 
+ 
+
+ <h5><a name="newfeat">Incredible New Features</a></h5>
+ 
+
+ 
+<dl>
+
+<dt>Ray Coverage Plots</dt>
+<dd>TTBox can now plot rays that start at any source point within the interior
+and reach any station at the surface. These coverage plots are produced using the new
+MKRAYCOVERAGE routine and can be produced in true 3D geometry or in a simplified/cartoonized 2D geometry</dd>
+
+<dt>Pdiff and Sdiff phases</dt>
+<dd>PDiff and SDiff phases can now be computed for all source depths and all distances at which they exist,
+(i.e. core shadow boundary onwards). MKX4P and MKTIM4P compute ray paths and MKRAYFAN plots rays.
+<br>
+Since PDiff and SDiff have the same ray parameter and incidence angles irrespective of epicentral distance,
+extra calling modes were introduced into MKX4P, MKTIM4P, MKRAYFAN. Backward compatibility is preserved.</dd>
+
+<dt>Ray path lengths</dt>
+<dd>the length of the ray paths plotted by MKRAYFAN and MKSYSNOPSIS is now computed and written into the UserData field of the generated line objects. To do so, a new routine MKRAYLENGTH is introduced (see below).</dd>
+
+<dt></dt>
+<dd></dd>
+
+</dl>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+ <h5><a name="newdoc">New/Modified Documentation</a></h5>
+
+  
+  
+
+ <dl>
+    <dt>Error Messages</dt>
+    <dd>New diagnostics from the new and modified routines have been added, obsolete ones were deleted.</dd>
+    
+    <dt>Programs</dt>
+    <dd>A dead link to a removed routine (mktouchdis) was removed.</dd>
+    
+    <dt>Data Structures</dt>
+    <dd>The description of the SYN structure has been updated.</dd>
+    
+ </dl>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+<h5><a name="newprog">New Routines</a></h5>
+ 
+
+<dl>
+
+   <dt>mkraylength</dt>
+   <dd>Computes the length of a ray path, in kilometers, from the output of MKX4P.</dd>
+
+   <dt>mkraycoverage</dt>
+   <dd>Plots the coverage of the planetary interior with rays, for any number and position of sources and any number of surface receivers.</dd>
+
+   <dt>mkangledir</dt>
+   <dd>Determine sign of the directional change necessary to rotated from an angle alpha to the angle beta.</dd>
+
+   <dt>mkanglediff</dt>
+   <dd>Determine the angular difference between two directions, using the dot product.</dd>
+
+
+   <dt>mkchkmodelintegrity</dt>
+   <dd>Tests velocity models (in MODEL structures as returned by MKREADND) for several bugs that make them impossible to use, and gives diagnostic informations.</dd>
+   
+   
+   <dt>mkreduceto180</dt>
+   <dd>Reduces epicentral distances to the interval 0&deg;...180&deg;, as common in seismology.</dd>
+   
+   
+</dl>
+   
+  
+  
+
+<h5><a name="modprog">Modified Routines</a></h5>
+
+
+<dl>
+
+<dt></dt>
+<dd></dd>
+
+<dt>mkclr2model</dt>
+<dd>When discretizing a clr model by defining an increment, the discrete version did not always contain a 
+depth sample at the planet's center. This did not do much harm to travel time computations, but is now fixed.</dd>
+
+<dt>mksynopsis</dt>
+<dd>The routine now stores the ray path length (in kilometers) in the UserData field of gthe line object generated for the ray</dd>
+
+<dt>mkrayfan</dt>
+<dd>The routine now stores the ray path length (in kilometers) in the UserData field of the line object generated for the ray</dd>
+
+<dt>mkreadnd</dt>
+<dd>The routine may now be called without any input parameters. In that case, it returns a model structutre in which all fields are empty.
+This is now a way to obtain a valid model structure for use in other programs. The error message which occured in previous versions in this case is now obsolete and has been removed.</dd>
+
+<dt>mkplotttcurves</dt>
+<dd>A switch is introcudced by which the drawing of phase name labels aside the travel time curves can be suppressed.</dd>
+
+<dt>mkraydiagram</dt>
+<dd>Does not modify the hol dstatus if it is on - this is necessary to be able to plot several ray fans into one plot.</dd>
+
+<dt>mkx4p, mktim4p, mksynopsis, mkttcurves, mksmarttakeoff</dt>
+<dd>Can now evaluate Pdiff</dd>
+
+<dt>mksynopsis</dt>
+<dd>Even if it was set silent, the routine resetted MatLab's tic/toc timer function. Fixed.</dd>
+
+<dt>mkpsampler</dt>
+<dd>In case MKSMARTTAKEOFF returns an empty list of angles, MKPSAMPLER now quits instead of throwing an error.</dd>
+
+<dt>mksmarttakeoff</dt>
+<dd>An invalid assumption about sources in liquids caused MKSMARTTAKEOFF to return empty for all sources in liquids, although only S wave sources are impossible. Now only S wave sources cause empty.</dd>
+
+<dt>mkttcurves</dt>
+<dd>The travel time curve plot (figure 3 of the MKTTCURVES output) is now underlain with standard MatLab axes withour tick labels to enable the grid. The grid is switched ON by default.</dd>
+
+<dt>mkwritend</dt>
+<dd>When the model publication year was given as a number (as usual), the routine produced a warning and didn't write the year into the file. fixed.</dd>
+
+<dt>mkfindextremedists</dt>
+<dd>The "insunfficient information" error ischanged into a warning, and some actions are executed now. This is experimental.</dd>
+
+<dt>mkraydepth</dt>
+<dd>A small bug in this routine supressed most of the SKSac phase. Fixed.</dd>
+
+<dt>mkreduceto180</dt>
+<dd>Now this routine returns empty if the input is empty. (instead of crashing)</dd>
+
+<dt>mksynopsis</dt>
+<dd>The returned SYN structure now contains a field .tp in which the greatest depth reached by the described rays is contained.</dd>
+
+<dt>mkchkmodelintegrity</dt>
+<dd>The routine now tests if the proper units are used for velocities and densities (the proper units are km/s and g/ccm), and casts a warning if values are suspicious. Values are considered suspicious if they are larger than 1000, since this points to use of m/s or kg/m<span class="sup">3</span></dd>
+
+<dt>mksmarttakeoff</dt>
+<dd>The output parameters minangle and maxangle were not initialized properly. This has been repaired.</dd>
+
+<dt>mkpolarframe</dt>
+<dd>The labeling of the angular scale is modified, some minor issues concerning the versatility of the routine were changed.</dd>
+
+<dt>mkreadnd</dt>
+<dd>After constructing the model structure, the new routine mkchkmodelintegrity is carried out.</dd>
+
+<dt>mkinterpmodel</dt>
+<dd>Before interpolating the model structure, mkchkmodelintegrity is carried out.</dd>
+
+<dt>mkshootray</dt>
+<dd>The previous version did not find ray solutions with epicentral distances outside 0&deg;...180&deg;. It did not recognize that distances &Delta; 360-&Delta;, n*360*&plusmn;Delta are all the same.</dd>
+
+<dt>mkfzeronest</dt>
+<dd>This routine may now be called without input parameters. It then returns the epsilon used to control the ietration convergence. This is used internally by MKSYNOPSIS.</dd>
+
+<dt>mkimprovemodel</dt>
+<dd>An "index exceeds matrix dimensions" error was observed if a LVZ starts at the surface, i.e. if v(z&gt;0)&lt;v(0). This has been repaired.</dd>
+
+<dt>mksynopsis</dt>
+<dd>Now uses MKREDUCETO180 to reduce all distances into the interval 0&deg;...180&deg;. It also supresses all solutions that deviate from the desired distance by more than the epsilon returned by MKFZERONEST</dd>
+
+
+
+
+
+</dl>
+  
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+<h5><a name="modstruct">New/Modified Data Structures</a></h5>
+
+
+<dl>
+
+
+<dt>SYN structure</dt>
+<dd>A new field .tp has been added to the SYN structure. This field contains the turning point depth (either from bending or from reflecting) of the ray.</dd>
+
+</dl>
+
+  
+ 
+<h5><a name="deprecated">Deprecated Routines</a></h5>
+ 
+
+
+ 
+ <hr>
+eof.
+  </body>
+</html>
