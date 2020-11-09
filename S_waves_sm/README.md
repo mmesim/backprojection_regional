@@ -12,3 +12,9 @@ Input: Raw waveforms instrument corrected for acceleration
 Written in Matlab
 
 Author: Maria Mesimeri
+
+
+
+Please also cite: 
+
+*Maria Mesimeri, Hao Zhang, Kristine L. Pankow (2020). Backprojection Imaging of the 2020 M w 5.5 Magna, Utah, Earthquake Using a Local Dense Strong-Motion Network. Seismological Research Letters. (in press)*
